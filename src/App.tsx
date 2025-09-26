@@ -110,6 +110,68 @@ function About3D() {
   )
 }
 
+function CertificationsGrid() {
+  const allCerts = [
+    { name: 'Google Data Analytics', issuer: 'Google on Coursera', image: '/photos/cert1.png', link: '#', date: 'September 08, 2025' },
+    { name: 'Google UX Design', issuer: 'Google on Coursera', image: '/photos/cert2.png', link: '#', date: 'August 16, 2025' },
+    { name: 'Google Project Management', issuer: 'Google on Coursera', image: '/photos/cert3.png', link: '#', date: 'July 24, 2025' },
+    { name: 'Introduction to Red Hat OpenShift AI', issuer: 'Red Hat', image: '/photos/cert4.png', link: '#', date: 'July 21, 2025' },
+    { name: 'Application Development I: Programming in Java EE', issuer: 'Red Hat', image: '/photos/cert5.png', link: '#', date: 'July 23, 2025' },
+    { name: 'Querying Fundamentals with MySQL', issuer: 'Data Analytics Philippines', image: '/photos/cert6.png', link: '#', date: 'October 31, 2024' },
+    { name: 'Data Scraping Bootcamp', issuer: 'Virtuals Protocol', image: '/photos/cert7.png', link: '#', date: 'July 29 - August 9, 2024', note: 'Top contributor in Batch 1 out of 200+ participants' },
+    { name: 'Fundamentals Statistics with Microsoft Excel', issuer: 'Data Analytics Philippines', image: '/photos/cert8.png', link: '#', date: 'August 5, 2024' },
+    { name: 'Business Intelligence with POWERBI Desktop', issuer: 'Data Analytics Philippines', image: '/photos/cert9.png', link: '#', date: 'August 5, 2024' }
+  ]
+  const [showAllCerts, setShowAllCerts] = useState(false)
+  const [preview, setPreview] = useState<string | null>(null)
+  const visible = showAllCerts ? allCerts : allCerts.slice(0, 3)
+  return (
+    <>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {visible.map((cert, i) => (
+          <motion.button
+            key={cert.name}
+            onClick={() => setPreview(cert.image)}
+            className="text-left group relative rounded-xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/8 transition-all"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: i * 0.05 }}
+          >
+            <div className="aspect-[4/3] overflow-hidden">
+              <img src={cert.image} alt={`${cert.name} certificate`} className="h-full w-full object-cover group-hover:scale-105 transition-transform" />
+            </div>
+            <div className="p-4">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm font-medium">{cert.name}</p>
+              </div>
+              <p className="text-xs text-neutral-400 mb-1">{cert.issuer}</p>
+              <p className="text-xs text-neutral-500">{cert.date}</p>
+              {cert.note && (
+                <p className="text-xs text-neutral-300 mt-2 italic">{cert.note}</p>
+              )}
+            </div>
+          </motion.button>
+        ))}
+      </div>
+      <div className="mt-6 flex justify-center">
+        <button onClick={() => setShowAllCerts(!showAllCerts)} className="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/90 hover:bg-white/10">
+          {showAllCerts ? 'Show less' : 'Show more'}
+        </button>
+      </div>
+      {preview && (
+        <div className="fixed inset-0 z-[70] grid place-items-center bg-black/70" onClick={() => setPreview(null)}>
+          <div className="max-w-4xl max-h-[85vh] p-2" onClick={(e) => e.stopPropagation()}>
+            <img src={preview} alt="Certificate preview" className="w-full h-full object-contain rounded-xl border border-white/10 bg-neutral-900" />
+            <div className="mt-3 text-center">
+              <button onClick={() => setPreview(null)} className="inline-flex items-center rounded-md bg-[hsl(var(--accent))] px-4 py-2 text-sm font-medium text-[hsl(var(--accent-foreground))] hover:opacity-90">Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
 // 3D hero removed per request; galaxy background remains global
 
 function Navbar() {
@@ -459,67 +521,12 @@ export default function App() {
 
         <Section id="certifications" title="Certifications" headingClass="text-center">
           <div className="mx-auto max-w-5xl">
-            {(() => {
-              const allCerts = [
-                { name: 'Google Data Analytics', issuer: 'Google on Coursera', image: '/photos/cert1.png', link: '#', date: 'September 08, 2025' },
-                { name: 'Google UX Design', issuer: 'Google on Coursera', image: '/photos/cert2.png', link: '#', date: 'August 16, 2025' },
-                { name: 'Google Project Management', issuer: 'Google on Coursera', image: '/photos/cert3.png', link: '#', date: 'July 24, 2025' },
-                { name: 'Introduction to Red Hat OpenShift AI', issuer: 'Red Hat', image: '/photos/cert4.png', link: '#', date: 'July 21, 2025' },
-                { name: 'Application Development I: Programming in Java EE', issuer: 'Red Hat', image: '/photos/cert5.png', link: '#', date: 'July 23, 2025' },
-                { name: 'Querying Fundamentals with MySQL', issuer: 'Data Analytics Philippines', image: '/photos/cert6.png', link: '#', date: 'October 31, 2024' },
-                { name: 'Data Scraping Bootcamp', issuer: 'Virtuals Protocol', image: '/photos/cert7.png', link: '#', date: 'July 29 - August 9, 2024', note: 'Top contributor in Batch 1 out of 200+ participants' },
-                { name: 'Fundamentals Statistics with Microsoft Excel', issuer: 'Data Analytics Philippines', image: '/photos/cert8.png', link: '#', date: 'August 5, 2024' },
-                { name: 'Business Intelligence with POWERBI Desktop', issuer: 'Data Analytics Philippines', image: '/photos/cert9.png', link: '#', date: 'August 5, 2024' }
-              ]
-              const [showAllCerts, setShowAllCerts] = useState(false)
-              const visible = showAllCerts ? allCerts : allCerts.slice(0, 3)
-              return (
-                <>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {visible.map((cert, i) => (
-                <motion.a
-                  key={cert.name}
-                  href={cert.link}
-                  className="group relative rounded-xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/8 transition-all"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: i * 0.05 }}
-                >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    {cert.image ? (
-                      <img src={cert.image} alt={`${cert.name} certificate`} className="h-full w-full object-cover group-hover:scale-105 transition-transform" />
-                    ) : (
-                      <div className="h-full w-full bg-[linear-gradient(135deg,rgba(199,162,255,0.25),rgba(59,130,246,0.2))] flex items-center justify-center">
-                        <span className="text-2xl">📜</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm font-medium">{cert.name}</p>
-                    </div>
-                    <p className="text-xs text-neutral-400 mb-1">{cert.issuer}</p>
-                    <p className="text-xs text-neutral-500">{cert.date}</p>
-                    {cert.note && (
-                      <p className="text-xs text-neutral-300 mt-2 italic">{cert.note}</p>
-                    )}
-                  </div>
-                </motion.a>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex justify-center">
-                    <button onClick={() => setShowAllCerts(!showAllCerts)} className="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/90 hover:bg-white/10">
-                      {showAllCerts ? 'Show less' : 'Show more'}
-                    </button>
-                  </div>
-                </>
-              )
-            })()}
+            <CertificationsGrid />
           </div>
         </Section>
 
         <Section id="contact" title="Contact" headingClass="text-center">
+            
           <p className="text-neutral-400 text-center mb-10">Let's connect and discuss opportunities or collaborations.</p>
           <div className="mx-auto max-w-2xl">
             <form className="space-y-6" onSubmit={handleContactSubmit}>

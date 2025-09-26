@@ -117,9 +117,10 @@ function Navbar() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur border-b border-white/10">
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
-        <a href="#hero" className="font-semibold text-neutral-100">GY</a>
+        <div />
         <div className="hidden md:flex gap-6 text-sm">
           <a className="hover:text-white/90" href="#about">About</a>
+          <a className="hover:text-white/90" href="#experience">Experience</a>
           <a className="hover:text-white/90" href="#projects">Projects</a>
           <a className="hover:text-white/90" href="#contact">Contact</a>
         </div>

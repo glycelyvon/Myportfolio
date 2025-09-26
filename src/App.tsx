@@ -5,7 +5,6 @@ import { Float, ContactShadows, Environment, Text } from '@react-three/drei'
 import * as THREE from 'three'
 import { useState, useRef } from 'react'
 import './index.css'
-import me from '../photos/me.png'
 function PhotoCard() {
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null)
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -27,7 +26,7 @@ function PhotoCard() {
               }}
             />
           )}
-          <img src={me} alt="Glycel Yvon portrait" className="relative block rounded-3xl border border-white/15 glow-animate w-[320px] md:w-[420px]" />
+          <img src="/photos/me.png" alt="Glycel Yvon portrait" className="relative block rounded-3xl border border-white/15 glow-animate w-[320px] md:w-[420px]" />
         </div>
       </div>
     </div>

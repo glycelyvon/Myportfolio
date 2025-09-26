@@ -3,7 +3,7 @@ import { Code2, Smartphone, Brain, BarChart3, Server, Workflow, Users, Linkedin,
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, ContactShadows, Environment, Text } from '@react-three/drei'
 import * as THREE from 'three'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './index.css'
 function PhotoCard() {
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null)
@@ -153,6 +153,10 @@ export default function App() {
   const [contactOpen, setContactOpen] = useState(false)
   const [contactSending, setContactSending] = useState(false)
   const [contactError, setContactError] = useState<string | null>(null)
+
+  useEffect(() => {
+    document.title = 'Glycel Yvon Virtucio'
+  }, [])
 
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()

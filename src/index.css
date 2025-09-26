@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* Design tokens */
+:root {
+  --accent: 267 84% 66%; /* cosmic purple */
+  --accent-foreground: 0 0% 8%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base selection + focus styles */
+::selection {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.focus-ring {
+  @apply outline-none ring-2 ring-[hsl(var(--accent))] ring-offset-2 ring-offset-neutral-900;
+}
+
+/* Helpers for 3D card flip */
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
+
+/* Animated gradient border */
+@keyframes gradient-shift { 
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animated-border {
+  background-image: linear-gradient(90deg, rgba(155,92,246,0.9), rgba(59,130,246,0.9), rgba(236,72,153,0.9));
+  background-size: 200% 200%;
+  animation: gradient-shift 10s ease infinite;
+}
+
+/* Subtle breathing glow */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 40px rgba(155,92,246,0.18), 0 0 80px rgba(59,130,246,0.10); }
+  50% { box-shadow: 0 0 70px rgba(155,92,246,0.28), 0 0 120px rgba(59,130,246,0.18); }
+}
+.glow-animate { animation: pulse-glow 5.5s ease-in-out infinite; }
+
+/* Changing headline text using CSS content animation */
+@keyframes rolecycle {
+  0% { content: 'Developer.'; }
+  33% { content: 'Analyst.'; }
+  66% { content: 'Innovator.'; }
+  100% { content: 'Developer.'; }
+}
+.changing-text::after {
+  content: 'Developer.';
+  display: inline-block;
+  color: #c7a2ff; /* light violet */
+  animation: rolecycle 6s steps(1, end) infinite;
+}
+
+/* Idle glowing effect for section headings */
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0 0 4px rgba(199,162,255,0.32)) drop-shadow(0 0 10px rgba(99,102,241,0.18)); }
+  50% { filter: drop-shadow(0 0 14px rgba(199,162,255,0.62)) drop-shadow(0 0 24px rgba(99,102,241,0.28)); }
+  100% { filter: drop-shadow(0 0 4px rgba(199,162,255,0.32)) drop-shadow(0 0 10px rgba(99,102,241,0.18)); }
+}
+.glow-text { animation: glowPulse 3.8s ease-in-out infinite; }
+
+.ring-pulse {
+  box-shadow: 0 0 50px rgba(199,162,255,0.25), inset 0 0 30px rgba(199,162,255,0.12);
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ring-rotate {
+  animation: rotate-slow 18s linear infinite;
+}
+
+/* Full-page galaxy background layers */
+.galaxy-nebula {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(155, 92, 246, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(59, 130, 246, 0.15), transparent 60%),
+    radial-gradient(1000px 700px at 50% 85%, rgba(236, 72, 153, 0.10), transparent 65%),
+    linear-gradient(180deg, #030311 0%, #050316 100%);
+  filter: saturate(1.1) contrast(1.05);
+}
+
+.galaxy-stars, .galaxy-twinkle {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Dense small stars */
+.galaxy-stars {
+  background-image: 
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.5), transparent 60%),
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.7), transparent 60%);
+  background-size: 700px 700px, 900px 900px, 800px 800px, 1000px 1000px, 1200px 1200px;
+  opacity: 0.7;
+}
+
+/* Soft twinkle animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.55; }
+}
+
+.galaxy-twinkle {
+  background-image: 
+    radial-gradient(2px 2px at 25% 35%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 65% 65%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 80% 25%, rgba(255,255,255,0.8), transparent 60%);
+  background-size: 900px 900px;
+  animation: twinkle 4.5s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: 0.35;
+}
+
+/* Cursor-follow glow */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: radial-gradient(240px 240px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), rgba(199,162,255,0.18), transparent 60%);
+  transition: background-position 80ms linear;
+}
+
+/* Subtle background pattern (rings) */
+.galaxy-pattern {
+  position: absolute;
+  inset: -10% -10% -10% -10%;
+  pointer-events: none;
+  background-image:
+    radial-gradient(800px 800px at 10% 40%, rgba(59,130,246,0.06) 0, transparent 60%),
+    radial-gradient(600px 600px at 90% 70%, rgba(155,92,246,0.06) 0, transparent 60%),
+    repeating-radial-gradient(circle at 12% 45%, rgba(255,255,255,0.04) 0 2px, transparent 2px 6px),
+    repeating-radial-gradient(circle at 85% 75%, rgba(255,255,255,0.03) 0 2px, transparent 2px 6px);
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+}

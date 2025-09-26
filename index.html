@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glycel Yvon — Interactive 3D Frontend Portfolio</title>
+    <meta name="description" content="Interactive portfolio by Glycel Yvon — Frontend engineer crafting 3D, performant, and accessible web experiences with React, Three.js, and motion." />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta property="og:title" content="Glycel Yvon — Interactive 3D Frontend Portfolio" />
+    <meta property="og:description" content="Interactive portfolio built with React, Three.js, and Framer Motion." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Glycel Yvon — Interactive 3D Frontend Portfolio" />
+    <meta name="twitter:description" content="Interactive portfolio built with React, Three.js, and Framer Motion." />
+  </head>
+  <body class="min-h-screen bg-black text-neutral-200 antialiased">
+    <!-- Global galaxy background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <div class="galaxy-nebula"></div>
+      <div class="galaxy-stars"></div>
+      <div class="galaxy-twinkle"></div>
+      <div class="galaxy-pattern"></div>
+    </div>
+    <!-- Cursor-follow glow overlay -->
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
